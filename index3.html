@@ -90,15 +90,18 @@
 					var csvList = $.csv.toObjects(data);
 					for (var i = 0; i < csvList.length; i++) {
 						var obj = csvList[i];
-						$('#listview').append(
-							$('<li/>', { }).append(
-								$('<a/>', {
-									'href': '#',
-									'onclick': 'javascript:setLatitudeAndLongitudeAndGoGoogleMap("' + obj.latitude + ',' +  obj.longitude + '");',
-									'text': obj.number + " " + obj.name
-								})
-							)
-						);
+						if (obj.number && obj.name && obj.latitude && obj.longitude) {
+						
+							$('#listview').append(
+								$('<li/>', { }).append(
+									$('<a/>', {
+										'href': '#',
+										'onclick': 'javascript:setLatitudeAndLongitudeAndGoGoogleMap("' + obj.latitude + ',' +  obj.longitude + '");',
+										'text': obj.number + " " + obj.name
+									})
+								)
+							);
+						}
 					};
 					$('#listview').listview('refresh');
 				}
