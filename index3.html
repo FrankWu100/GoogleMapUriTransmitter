@@ -34,30 +34,30 @@
 		window.open(href);
 	}
 
-	function setlatitudeAndlongitudeAndGoGoogleMap(latitudeAndlongitude) {
+	function setLatitudeAndLongitudeAndGoGoogleMap(LatitudeAndLongitude) {
 
 		if (isMobile.iOS()) {
-			href = googleMapUri.iOS(latitudeAndlongitude, "18");
+			href = googleMapUri.iOS(LatitudeAndLongitude, "18");
 		}
 		else if (isMobile.Android()) {
-			href = googleMapUri.Android(latitudeAndlongitude, "18");
+			href = googleMapUri.Android(LatitudeAndLongitude, "18");
 		}
 		else {
-			href = googleMapUri.URL(latitudeAndlongitude, "18");
+			href = googleMapUri.URL(LatitudeAndLongitude, "18");
 		}
 
 		window.open(href);
 	}
 
 	var googleMapUri = {
-		iOS: function(latitudeAndlongitude, zoom) {
-			return "comgooglemaps://?center=" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[1] + "&zoom=" + zoom;
+		iOS: function(LatitudeAndLongitude, zoom) {
+			return "comgooglemaps://?center=" + LatitudeAndLongitude.split(",")[0] + "," + LatitudeAndLongitude.split(",")[1] + "&zoom=" + zoom;
 		},
-		Android: function(latitudeAndlongitude, zoom) {
-			return "geo:" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[1] + "?z=" + zoom;
+		Android: function(LatitudeAndLongitude, zoom) {
+			return "geo:" + LatitudeAndLongitude.split(",")[0] + "," + LatitudeAndLongitude.split(",")[1] + "?z=" + zoom;
 		},
-		URL: function(latitudeAndlongitude, zoom) {
-			return "http://www.google.com/maps/@" + latitudeAndlongitude.split(",")[1] + "," + latitudeAndlongitude.split(",")[1] + "," + zoom + "z";
+		URL: function(LatitudeAndLongitude, zoom) {
+			return "http://www.google.com/maps/@" + LatitudeAndLongitude.split(",")[1] + "," + LatitudeAndLongitude.split(",")[1] + "," + zoom + "z";
 		},
 	};
 
@@ -84,7 +84,7 @@
 		$(document).ready(function() {		
 			$.ajax({
 				type: "GET",
-				url: "pokemonlist.csv",
+				url: "https://docs.google.com/spreadsheet/pub?hl=zh&hl=zh&key=0AhYeydirjfOFdENPYkJBemFzVm9ka0hiQ01yM2wwT0E&single=true&gid=0&output=csv",
 				dataType: "text",
 				success: function(data) {
 					var csvList = $.csv.toObjects(data);
@@ -94,7 +94,7 @@
 							$('<li/>', { }).append(
 								$('<a/>', {
 									'href': '#',
-									'onclick': 'javascript:setlatitudeAndlongitudeAndGoGoogleMap("' + obj.latitude + ',' +  obj.longitude + '");',
+									'onclick': 'javascript:setLatitudeAndLongitudeAndGoGoogleMap("' + obj.latitude + ',' +  obj.longitude + '");',
 									'text': obj.number + " " + obj.name
 								})
 							)
