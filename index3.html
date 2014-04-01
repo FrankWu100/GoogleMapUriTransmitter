@@ -35,28 +35,29 @@
 	}
 
 	function setlatitudeAndlongitudeAndGoGoogleMap(latitudeAndlongitude) {
-		setlatitudeAndlongitude(latitudeAndlongitude);
-		goGoogleMap();
-	}
 
-	function setlatitudeAndlongitude(latitudeAndlongitude) {
-		//緯度
-		var latitude = latitudeAndlongitude.split(",")[0];
-		$("#text-latitude").val(latitude);
-		//經度 
-		var longitude = latitudeAndlongitude.split(",")[1];
-		$("#text-longitude").val(longitude);
+		if (isMobile.iOS()) {
+			href = googleMapUri.iOS(latitudeAndlongitude, "18");
+		}
+		else if (isMobile.Android()) {
+			href = googleMapUri.Android(latitudeAndlongitude, "18");
+		}
+		else {
+			href = googleMapUri.URL(latitudeAndlongitude, "18");
+		}
+
+		window.open(href);
 	}
 
 	var googleMapUri = {
-		iOS: function() {
-			return "comgooglemaps://?center=" + $("#text-latitude").val() + "," + $("#text-longitude").val() + "&zoom=" + $('#slider').val();
+		iOS: function(latitudeAndlongitude, zoom) {
+			return "comgooglemaps://?center=" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[0] + "&zoom=" + zoom;
 		},
-		Android: function() {
-			return "geo:" + $("#text-latitude").val() + "," + $("#text-longitude").val() + "?z=" + $('#slider').val();
+		Android: function(latitudeAndlongitude, zoom) {
+			return "geo:" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[0] + "?z=" + zoom;
 		},
-		URL: function() {
-			return "http://www.google.com/maps/@" + $("#text-latitude")[0].value + "," + $("#text-longitude")[0].value + "," + $('#slider')[0].value + "z";
+		URL: function(latitudeAndlongitude, zoom) {
+			return "http://www.google.com/maps/@" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[0] + "," + zoom + "z";
 		},
 	};
 
@@ -80,59 +81,12 @@
 
 	window.onload = function ()
 	{
-		$(document).ready(function() {
-			var loc = getParameterByName("loc");
-			if (loc) {
-				var regex = /^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
-				if (regex.exec(loc)) {
-					setlatitudeAndlongitude(loc);
-				}
-			}
-
-			if (isMobile.iOS()) {
-				$('#select-choice').val("iOS")
-				$('#select-choice').selectmenu("refresh")
-			}
-			else if (isMobile.Android()) {
-				$('#select-choice').val("Android")
-				$('#select-choice').selectmenu("refresh")
-			}
-			else {
-				$('#select-choice').val("Web")
-				$('#select-choice').selectmenu("refresh")
-			}
-
-			$('#flip').change(function() {
-				$('#flip')[0].selectedIndex == 1 ? true:false
-				if ($(this).val() == "on") {
-					"on";
-					$('#slider').slider('enable');
-					$('#slider').textinput("enable");
-				}
-				else if ($(this).val() == "off")  {
-					"off";
-					$('#slider').slider("disable");
-					$('#slider').textinput("disable");
-				}
-			});
-		
+		$(document).ready(function() {		
 			$.ajax({
 				type: "GET",
 				url: "pokemonlist.csv",
 				dataType: "text",
-				success: function(data) { 
-					// var csvText = data;
-					// var csvList = new Array();
-					// var allText = data;
-					// var allTextLines = allText.split(/\r\n|\n/);
-					// var headers = allTextLines[0].split(',');
-					// for (var i=1; i<allTextLines.length; i++) {
-					// 	var data = allTextLines[i].split(',');
-					// 	if (data.length == headers.length) {
-					// 		csvList.push({ number: data[0], name: data[1], latitude: data[2], longitude: data[3] });
-					// 	}
-					// }
-
+				success: function(data) {
 					var csvList = $.csv.toObjects(data);
 					for (var i = 0; i < csvList.length; i++) {
 						var obj = csvList[i];
@@ -161,48 +115,6 @@
 				<h1>Google Map App 跳轉</h1>
 			</div><!-- /header -->
 			<div data-role="content">
-				<!-- <ul data-role="listview" data-inset="true">
-					<li class="ui-field-contain"> -->
-						<!-- <div class="ui-grid-a">
-							<div class="ui-block-a">
-								<label for="text-latitude">緯度：</label>
-								<input type="text" name="text-latitude" id="text-latitude" value="" data-clear-btn="true">
-							</div>
-							<div class="ui-block-b">
-								<label for="text-longitude">經度：</label>
-								<input type="text" name="text-longitude" id="text-longitude" value="" data-clear-btn="true">
-							</div>
-						</div> --><!-- /grid-a -->
-					<!-- </li>
-					<li class="ui-field-contain">
-						<label for="flip">地圖自訂：</label>
-						<select name="flip" id="flip" data-role="slider">
-							<option value="off" selected="">Off</option>
-							<option value="on">On</option>
-						</select>
-					</li>
-					<li class="ui-field-contain">
-						<label for="slider">放大倍率：</label>
-						<input type="range" name="slider" id="slider" value="18" min="10" max="25" data-highlight="true">
-					</li>
-					<li class="ui-field-contain">
-						<label for="select-choice" class="select">平台選擇：</label>
-						<select name="select-choice" id="select-choice">
-							<option value="iOS">iOS</option>
-							<option value="Android">Android</option>
-							<option value="Web">Web</option>
-						</select>
-					</li>
-					<li class="ui-body ui-body-b">
-						<fieldset class="ui-grid-a">
-							<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-a" onclick="javascript:goGoogleMap();">前往</a>
-						</fieldset>
-					</li>
-				</ul> -->
-				<!-- <div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
-					<p>使用範例方法：<a href="http://frankwu100.github.io/GoogleMapUriTransmitter/?loc=35.659668,139.730170" class="ui-link" data-ajax="false">http://frankwu100.github.io/GoogleMapUriTransmitter/?loc=35.659668,139.730170</a></p>
-					<p>[參考] 經緯度查找：<a href="http://www.blogfuntw.com/2012/01/mobile01-map/" class="ui-link" data-ajax="false" target="_blank">如何使用 Google map 查找經緯度座標</a></p>
-				</div> -->
 				<ul name="listview" id="listview" data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
 					<!-- <li><a href="#">A</a></li>
 					<li><a href="#">B</a></li> -->
