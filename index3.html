@@ -93,7 +93,7 @@
 		$(document).ready(function() {		
 			$.ajax({
 				type: "GET",
-				url: "https://docs.google.com/spreadsheet/pub?hl=zh&hl=zh&key=0AhYeydirjfOFdENPYkJBemFzVm9ka0hiQ01yM2wwT0E&single=true&gid=0&output=csv",
+				url: "pokemonlist.csv",
 				dataType: "text",
 				success: function(data) {
 					var csvList = $.csv.toObjects(data);
