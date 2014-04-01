@@ -34,12 +34,12 @@
 		window.open(href);
 	}
 
-	function setlatitudeAndlongitude(latitudeAndlongitude) {
+	function setLatitudeAndLongitude(LatitudeAndLongitude) {
 		//緯度
-		var latitude = latitudeAndlongitude.split(",")[0];
+		var latitude = LatitudeAndLongitude.split(",")[0];
 		$("#text-latitude").val(latitude);
 		//經度 
-		var longitude = latitudeAndlongitude.split(",")[1];
+		var longitude = LatitudeAndLongitude.split(",")[1];
 		$("#text-longitude").val(longitude);
 	}
 
@@ -80,7 +80,7 @@
 			if (loc) {
 				var regex = /^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
 				if (regex.exec(loc)) {
-					setlatitudeAndlongitude(loc);
+					setLatitudeAndLongitude(loc);
 				}
 			}
 
@@ -113,33 +113,24 @@
 		
 			$.ajax({
 				type: "GET",
-				url: "pokemonlist.csv",
+				url: "https://docs.google.com/spreadsheet/pub?hl=zh&hl=zh&key=0AhYeydirjfOFdENPYkJBemFzVm9ka0hiQ01yM2wwT0E&single=true&gid=0&output=csv",
 				dataType: "text",
-				success: function(data) { 
-					// var csvText = data;
-					// var csvList = new Array();
-					// var allText = data;
-					// var allTextLines = allText.split(/\r\n|\n/);
-					// var headers = allTextLines[0].split(',');
-					// for (var i=1; i<allTextLines.length; i++) {
-					// 	var data = allTextLines[i].split(',');
-					// 	if (data.length == headers.length) {
-					// 		csvList.push({ number: data[0], name: data[1], latitude: data[2], longitude: data[3] });
-					// 	}
-					// }
-
+				success: function(data) {
 					var csvList = $.csv.toObjects(data);
 					for (var i = 0; i < csvList.length; i++) {
 						var obj = csvList[i];
-						$('#listview').append(
-							$('<li/>', { }).append(
-								$('<a/>', {
-									'href': '#',
-									'onclick': 'javascript:setlatitudeAndlongitude("' + obj.latitude + ',' +  obj.longitude + '");',
-									'text': obj.number + " " + obj.name
-								})
-							)
-						);
+						if (obj.number && obj.name && obj.latitude && obj.longitude) {
+						
+							$('#listview').append(
+								$('<li/>', { }).append(
+									$('<a/>', {
+										'href': '#',
+										'onclick': 'javascript:setLatitudeAndLongitudeAndGoGoogleMap("' + obj.latitude + ',' +  obj.longitude + '");',
+										'text': obj.number + " " + obj.name
+									})
+								)
+							);
+						}
 					};
 					$('#listview').listview('refresh');
 				}
