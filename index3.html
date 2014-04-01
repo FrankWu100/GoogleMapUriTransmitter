@@ -99,21 +99,23 @@
 					var csvList = $.csv.toObjects(data);
 					for (var i = 0; i < csvList.length; i++) {
 						var obj = csvList[i];
-						$('#listview').append(
-							$('<li/>', { 'id': 'obj-' + obj.number }).append(
-								$('<a/>', {
-									'href': '#',
-									'onclick': 'javascript:setLatitudeAndLongitudeAndGoGoogleMap("' + obj.latitude + ',' +  obj.longitude + '");',
-									'text': obj.number + " " + obj.name
+						if (obj.number && obj.name && obj.latitude && obj.longitude) {
+							$('#listview').append(
+								$('<li/>', { 'id': 'obj-' + obj.number }).append(
+									$('<a/>', {
+										'href': '#',
+										'onclick': 'javascript:setLatitudeAndLongitudeAndGoGoogleMap("' + obj.latitude + ',' +  obj.longitude + '");',
+										'text': obj.number + " " + obj.name
+									})
+								)
+							);
+							$('#obj-' + obj.number).append(
+								$('<img/>', {
+									'src': 'http://img.pokemondb.net/artwork/' + obj.name.toLowerCase() + '.jpg',
+									'class': 'ui-li-thumb'
 								})
 							)
-						);
-						$('#obj-' + obj.number).append(
-							$('<img/>', {
-								'src': 'http://img.pokemondb.net/artwork/' + obj.name.toLowerCase() + '.jpg',
-								'class': 'ui-li-thumb'
-							})
-						)
+						}
 					};
 
 					$('#listview').listview('refresh');
