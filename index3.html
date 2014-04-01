@@ -57,7 +57,7 @@
 			return "geo:" + LatitudeAndLongitude.split(",")[0] + "," + LatitudeAndLongitude.split(",")[1] + "?z=" + zoom;
 		},
 		URL: function(LatitudeAndLongitude, zoom) {
-			return "http://www.google.com/maps/@" + LatitudeAndLongitude.split(",")[1] + "," + LatitudeAndLongitude.split(",")[1] + "," + zoom + "z";
+			return "http://www.google.com/maps/@" + LatitudeAndLongitude.split(",")[0] + "," + LatitudeAndLongitude.split(",")[1] + "," + zoom + "z";
 		},
 	};
 
