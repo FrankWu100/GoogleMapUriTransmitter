@@ -106,55 +106,55 @@
 		});
 	}
 </script>
-
 </head>
 
 <body >
-<form  data-ajax="false">
-	<div data-role="page" >
-		<div data-role="header" data-theme="b">
-			<h1>Google Map App 跳轉</h1>
-		</div><!-- /header -->
-		<div data-role="content">
-		    <ul data-role="listview" data-inset="true">
-		        <li class="ui-field-contain">
-	                 <label for="text-longitude">經度：</label>
-				     <input type="text" name="text-longitude" id="text-longitude" value="" data-clear-btn="true">
-		        </li>
-		        <li class="ui-field-contain">
-				     <label for="text-latitude">緯度：</label>
-				     <input type="text" name="text-latitude" id="text-latitude" value="" data-clear-btn="true">
-		        </li>
-		        <li class="ui-field-contain">
-		            <label for="flip">地圖自訂：</label>
-		            <select name="flip" id="flip" data-role="slider">
-		                <option value="off" selected="">Off</option>
-		                <option value="on">On</option>
-		            </select>
-		        </li>
-		        <li class="ui-field-contain">
-		            <label for="slider">放大倍率：</label>
-		            <input type="range" name="slider" id="slider" value="15" min="10" max="20" data-highlight="true" disabled="disabled">
-		        </li>
-		        <li class="ui-field-contain">
-		            <label for="select-choice" class="select">平台選擇：</label>
-		            <select name="select-choice" id="select-choice">
-		                <option value="iOS">iOS</option>
-		                <option value="Android">Android</option>
-		                <option value="Web">Web</option>
-		            </select>
-		        </li>
-		        <li class="ui-body ui-body-b">
-		            <fieldset class="ui-grid-a">
-						<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-a" onclick="javascript:goGoogleMap();">前往</a>
-		            </fieldset>
-		        </li>
-		    </ul>
-		    <div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
-				<p>使用範例方法：<a href="http://frankwu100.github.io/GoogleMapUriTransmitter/index.html?loc=35.659668,139.730170" class="ui-link">http://frankwu100.github.io/GoogleMapUriTransmitter/index.html?loc=35.659668,139.730170</a></p>
-				<p>[參考] 經緯度查找：<a href="http://www.blogfuntw.com/2012/01/mobile01-map/" class="ui-link">如何使用 Google map 查找經緯度座標</a></p>
-			</div>
-		</div><!-- /content -->
-	</div><!-- /page -->
-</form>
+	<form  data-ajax="false">
+		<div data-role="page" >
+			<div data-role="header" data-theme="b">
+				<h1>Google Map App 跳轉</h1>
+			</div><!-- /header -->
+			<div data-role="content">
+			    <ul data-role="listview" data-inset="true">
+			        <li class="ui-field-contain">
+		                 <label for="text-longitude">經度：</label>
+					     <input type="text" name="text-longitude" id="text-longitude" value="" data-clear-btn="true">
+			        </li>
+			        <li class="ui-field-contain">
+					     <label for="text-latitude">緯度：</label>
+					     <input type="text" name="text-latitude" id="text-latitude" value="" data-clear-btn="true">
+			        </li>
+			        <li class="ui-field-contain">
+			            <label for="flip">地圖自訂：</label>
+			            <select name="flip" id="flip" data-role="slider">
+			                <option value="off" selected="">Off</option>
+			                <option value="on">On</option>
+			            </select>
+			        </li>
+			        <li class="ui-field-contain">
+			            <label for="slider">放大倍率：</label>
+			            <input type="range" name="slider" id="slider" value="15" min="10" max="20" data-highlight="true" disabled="disabled">
+			        </li>
+			        <li class="ui-field-contain">
+			            <label for="select-choice" class="select">平台選擇：</label>
+			            <select name="select-choice" id="select-choice">
+			                <option value="iOS">iOS</option>
+			                <option value="Android">Android</option>
+			                <option value="Web">Web</option>
+			            </select>
+			        </li>
+			        <li class="ui-body ui-body-b">
+			            <fieldset class="ui-grid-a">
+							<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-a" onclick="javascript:goGoogleMap();">前往</a>
+			            </fieldset>
+			        </li>
+			    </ul>
+			    <div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
+					<p>使用範例方法：<a href="http://frankwu100.github.io/GoogleMapUriTransmitter/index.html?loc=35.659668,139.730170" class="ui-link" data-ajax="false">http://frankwu100.github.io/GoogleMapUriTransmitter/index.html?loc=35.659668,139.730170</a></p>
+					<p>[參考] 經緯度查找：<a href="http://www.blogfuntw.com/2012/01/mobile01-map/" class="ui-link" data-ajax="false" target="_blank">如何使用 Google map 查找經緯度座標</a></p>
+				</div>
+			</div><!-- /content -->
+		</div><!-- /page -->
+	</form>
 </body>
+</html>
