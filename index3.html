@@ -51,13 +51,13 @@
 
 	var googleMapUri = {
 		iOS: function(latitudeAndlongitude, zoom) {
-			return "comgooglemaps://?center=" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[0] + "&zoom=" + zoom;
+			return "comgooglemaps://?center=" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[1] + "&zoom=" + zoom;
 		},
 		Android: function(latitudeAndlongitude, zoom) {
-			return "geo:" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[0] + "?z=" + zoom;
+			return "geo:" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[1] + "?z=" + zoom;
 		},
 		URL: function(latitudeAndlongitude, zoom) {
-			return "http://www.google.com/maps/@" + latitudeAndlongitude.split(",")[0] + "," + latitudeAndlongitude.split(",")[0] + "," + zoom + "z";
+			return "http://www.google.com/maps/@" + latitudeAndlongitude.split(",")[1] + "," + latitudeAndlongitude.split(",")[1] + "," + zoom + "z";
 		},
 	};
 
@@ -115,7 +115,7 @@
 				<h1>Google Map App 跳轉</h1>
 			</div><!-- /header -->
 			<div data-role="content">
-				<ul name="listview" id="listview" data-role="listview" data-filter="true" data-filter-placeholder="Search..." data-inset="true">
+				<ul name="listview" id="listview" data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
 					<!-- <li><a href="#">A</a></li>
 					<li><a href="#">B</a></li> -->
 				</ul>
