@@ -35,7 +35,7 @@
 
 	var googleMapUri = {
 	    iOS: function() {
-	        return "comgooglemaps://?q=" + $("#text-latitude").val() + "," + $("#text-longitude").val() + "&zoom=" + $('#slider').val();
+	        return "comgooglemaps://?center=" + $("#text-latitude").val() + "," + $("#text-longitude").val() + "&zoom=" + $('#slider').val();
 	    },
 	    Android: function() {
 	        return "geo:" + $("#text-latitude").val() + "," + $("#text-longitude").val() + "?z=" + $('#slider').val();
