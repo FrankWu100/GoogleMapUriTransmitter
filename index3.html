@@ -90,7 +90,11 @@
 
 	window.onload = function ()
 	{
-		$(document).ready(function() {		
+		$(document).ready(function() {
+			$("img[class='ui-li-thumb']").load(function() {
+    			$(this).css('padding-top',((80-this.height)/2));
+			});
+			
 			$.ajax({
 				type: "GET",
 				url: "https://docs.google.com/spreadsheet/pub?hl=zh&hl=zh&key=0AhYeydirjfOFdENPYkJBemFzVm9ka0hiQ01yM2wwT0E&single=true&gid=0&output=csv",
@@ -111,10 +115,13 @@
 							);
 							$('#obj-' + obj.number).append(
 								$('<img/>', {
+									'id': 'img-' + obj.number,
 									'src': 'http://img.pokemondb.net/artwork/' + obj.name.toLowerCase() + '.jpg',
 									'class': 'ui-li-thumb'
 								})
 							)
+							var imgId = 'img-' + obj.number;
+							$(imgId).attr( 'style', 'padding-top:' + (80-$(imgId).height())/2 + 'px; padding-left:' + (80 - $(imgId).width())/2 + 'px')
 						}
 					};
 
