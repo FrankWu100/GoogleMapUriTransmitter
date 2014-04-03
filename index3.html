@@ -93,6 +93,7 @@
 		$(document).ready(function() {
 			$("img[class='ui-li-thumb']").load(function() {
     			$(this).css('padding-top',((80-this.height)/2));
+    			$(this).css('padding-left',((80-this.width)/2));
 			});
 			
 			$.ajax({
@@ -120,8 +121,8 @@
 									'class': 'ui-li-thumb'
 								})
 							)
-							var imgId = '#img-' + obj.number;
-							$(imgId).attr( 'style', 'padding-top:' + (80-$(imgId).height())/2 + 'px; padding-left:' + (80 - $(imgId).width())/2 + 'px')
+							//var imgId = '#img-' + obj.number;
+							//$(imgId).attr( 'style', 'padding-top:' + (80-$(imgId).height())/2 + 'px; padding-left:' + (80 - $(imgId).width())/2 + 'px')
 						}
 					};
 
